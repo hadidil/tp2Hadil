@@ -58,6 +58,11 @@
             <artifactId>langchain4j-easy-rag</artifactId>
             <version>1.23.0-beta33</version>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.6.5</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -14,8 +14,8 @@ public class Test7Outils {
                 .apiKey(System.getenv("GEMINI_KEY"))
                 .modelName("gemini-3.5-flash-lite")
                 .temperature(0.7)
+                .logRequestsAndResponses(true)
                 .build();
-
         AssistantMeteo assistant = AiServices.builder(AssistantMeteo.class)
                 .chatModel(modele)
                 .chatMemory(MessageWindowChatMemory.withMaxMessages(20))
