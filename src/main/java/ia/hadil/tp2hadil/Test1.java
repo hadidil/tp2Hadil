@@ -18,7 +18,7 @@ public class Test1 {
         System.out.println("Question simple : " + modele.chat("Traduis 'bonjour' en anglais"));
 
         // Test 2 : l'heure
-        System.out.println("Heure : " + modele.chat("Quelle heure est-il ?"));
+        System.out.println(modele.chat("Comment s’appelle le chat de Pierre ?"));
 
         // Test 3 : le nom, avec deux appels indépendants
         System.out.println("Réponse 1 : " + modele.chat("Bonjour, je m'appelle Hadil Maghnaoui."));

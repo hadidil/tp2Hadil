@@ -2,7 +2,7 @@ package ia.hadil.tp2hadil;
 
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.model.embedding.EmbeddingModel;
-import dev.langchain4j.model.embedding.onnx.bgesmallenv15.BgeSmallEnV15EmbeddingModel;
+//import dev.langchain4j.model.embedding.onnx.bgesmallenv15.BgeSmallEnV15EmbeddingModel;
 import dev.langchain4j.model.google.genai.GoogleGenAiEmbeddingModel;
 import dev.langchain4j.store.embedding.CosineSimilarity;
 
@@ -20,7 +20,7 @@ public class Test4Embeddings {
                 {"Paris est la capitale de la France.", "La capitale de la France est Paris."}
         };
 
-        EmbeddingModel modeleBge = new BgeSmallEnV15EmbeddingModel();
+//        EmbeddingModel modeleBge = new BgeSmallEnV15EmbeddingModel();
 
         EmbeddingModel modeleGoogle = GoogleGenAiEmbeddingModel.builder()
                 .apiKey(System.getenv("GEMINI_KEY"))
@@ -29,7 +29,7 @@ public class Test4Embeddings {
                 .timeout(Duration.ofSeconds(10))
                 .build();
 
-        afficher("Modèle BGE", modeleBge, couples);
+//        afficher("Modèle BGE", modeleBge, couples);
         afficher("Modèle Google", modeleGoogle, couples);
     }
 
