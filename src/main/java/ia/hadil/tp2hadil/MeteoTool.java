@@ -6,9 +6,11 @@ import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 
 public class MeteoTool {
 
@@ -39,5 +41,21 @@ public class MeteoTool {
             }
         }
         return false;
+    }
+    @Tool("Donne la latitude et la longitude d'une ville à partir de son nom (en anglais, par exemple 'Rabat,Morocco'). Retourne un tableau [latitude, longitude].")
+    public double[] getCoordonnees(@P("Nom de la ville, en anglais") String ville) throws Exception {
+        String nom = URLEncoder.encode(ville, StandardCharsets.UTF_8);
+        String url = "https://geocoding-api.open-meteo.com/v1/search?name=" + nom + "&count=1";
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest requete = HttpRequest.newBuilder().uri(URI.create(url)).build();
+        HttpResponse<String> reponse = client.send(requete, HttpResponse.BodyHandlers.ofString());
+
+        JsonNode resultats = new ObjectMapper().readTree(reponse.body()).path("results");
+        if (resultats.isMissingNode() || resultats.isEmpty()) {
+            throw new IllegalArgumentException("Ville introuvable : " + ville);
+        }
+        JsonNode premier = resultats.get(0);
+        return new double[]{premier.path("latitude").asDouble(), premier.path("longitude").asDouble()};
     }
 }
